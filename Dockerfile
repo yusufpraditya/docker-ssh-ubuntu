@@ -10,6 +10,10 @@ LABEL maintainer="aptalca"
 # environment settings
 ENV HOME="/home/ubuntu"
 
+RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 test
+
+RUN  echo 'test:test' | chpasswd
+
 RUN \
   echo "**** install runtime dependencies ****" && \
   apt-get update && \
@@ -20,10 +24,6 @@ RUN \
   apt-get install -y --no-install-recommends -- ssh && \
   mkdir -p -m0755 /run/sshd && \
   mkdir -p -m700 /home/ubuntu/.ssh
-
-RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 test
-
-RUN  echo 'test:test' | chpasswd
 
 RUN service ssh start
 
