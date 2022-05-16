@@ -56,8 +56,5 @@ RUN \
     /var/tmp/* \
     /etc/apt/sources.list.d/nodesource.list
 
-# add local files
-COPY /root /
-
 # ports and volumes
 EXPOSE 8443
