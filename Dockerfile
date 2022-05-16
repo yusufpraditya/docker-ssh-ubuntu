@@ -7,12 +7,9 @@ ARG CODE_RELEASE
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="aptalca"
 
-# environment settings
-ENV HOME="/home/ubuntu"
+RUN useradd -rm -d /home/ubuntu_test -s /bin/bash -g root -G sudo -u 1000 test2
 
-RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 test
-
-RUN  echo 'test:test' | chpasswd
+RUN  echo 'test2:test2' | chpasswd
 
 RUN \
   echo "**** install runtime dependencies ****" && \
@@ -23,7 +20,7 @@ RUN \
     sudo && \
   apt-get install -y --no-install-recommends -- ssh && \
   mkdir -p -m0755 /run/sshd && \
-  mkdir -p -m700 /home/ubuntu/.ssh
+  mkdir -p -m700 /home/ubuntu_test/.ssh
 
 RUN service ssh start
 
