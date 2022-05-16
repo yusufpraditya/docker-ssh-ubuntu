@@ -16,7 +16,10 @@ RUN \
   apt-get upgrade -y && \
   apt-get install -y \
     net-tools \
-    sudo
+    sudo && \
+  apt-get install -y --no-install-recommends -- ssh && \
+  mkdir -p -m0755 /run/sshd && \
+  mkdir -m700 ~/.ssh  
 
 # ports and volumes
 EXPOSE 22
