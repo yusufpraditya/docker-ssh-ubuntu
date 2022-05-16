@@ -1,5 +1,7 @@
 FROM ghcr.io/linuxserver/baseimage-ubuntu:focal
 
+ADD VERSION .
+
 # set version label
 ARG BUILD_DATE
 ARG VERSION
