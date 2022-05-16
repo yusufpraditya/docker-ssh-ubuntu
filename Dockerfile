@@ -12,6 +12,8 @@ ENV HOME="/config"
 
 RUN \
   echo "**** install runtime dependencies ****" && \
+  apt-get update && \
+  apt-get upgrade && \
   apt-get install -y \
     net-tools \
     sudo && \
