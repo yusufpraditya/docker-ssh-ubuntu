@@ -1,17 +1,42 @@
-FROM ubuntu:latest
+FROM ghcr.io/linuxserver/baseimage-ubuntu:focal
 
-RUN apt update
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+ARG CODE_RELEASE
+LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="aptalca"
 
-RUN apt install  openssh-server sudo -y
+# environment settings
+ENV HOME="/config"
 
-RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 yusuf
+RUN \
+  echo "**** install node repo ****" && \
+  curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
+  echo 'deb https://deb.nodesource.com/node_14.x focal main' \
+    > /etc/apt/sources.list.d/nodesource.list && \
+  echo "**** install build dependencies ****" && \
+  apt-get update && \
+  apt-get install -y \
+    build-essential \
+    nodejs && \
+  echo "**** install runtime dependencies ****" && \
+  apt-get install -y \
+    git \
+    jq \
+    libatomic1 \
+    nano \
+    net-tools \
+    sudo && \
 
-RUN usermod -aG sudo yusuf
+  echo "**** clean up ****" && \
+  apt-get purge --auto-remove -y \
+    build-essential \
+    nodejs && \
+  apt-get clean && \
 
-RUN service ssh start
+# add local files
+COPY /root /
 
-RUN  echo 'yusuf:yusuf' | chpasswd
-
+# ports
 EXPOSE 22
-
-CMD ["/usr/sbin/sshd","-D"]
