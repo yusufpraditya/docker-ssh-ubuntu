@@ -16,7 +16,7 @@ RUN \
   apt-get upgrade && \
   apt-get install -y \
     net-tools \
-    sudo && \
+    sudo
 
 # ports and volumes
 EXPOSE 22
