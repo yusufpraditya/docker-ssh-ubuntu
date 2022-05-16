@@ -1,0 +1,36 @@
+version: '2.0'
+services:
+  ssh:
+    image: ghcr.io/yusufpraditya/docker-ssh-ubuntu:main   
+    expose:
+      - port: 22
+        as: 22
+        to:
+          - global: true
+profiles:
+  compute:
+    ssh:
+      resources:
+        cpu:
+          units: 2.0
+        memory:
+          size: 1Gi
+        storage:
+          size: 1Gi
+  placement:
+    akash:
+      attributes:
+        host: akash
+      signedBy:
+        anyOf:
+          - "akash1365yvmc4s7awdyj3n2sav7xfx76adc6dnmlx63"
+      pricing:
+        ssh:
+          denom: uakt
+          amount: 100
+deployment:
+  ssh:
+    akash:
+      profile: ssh
+      count: 1
+
