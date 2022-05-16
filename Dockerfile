@@ -14,7 +14,7 @@ RUN \
   echo "**** install build dependencies ****" && \
   apt-get update && \
   apt-get install -y \
-    build-essential \
+    build-essential && \
   echo "**** install runtime dependencies ****" && \
   apt-get install -y \
     git \
@@ -26,7 +26,7 @@ RUN \
 
   echo "**** clean up ****" && \
   apt-get purge --auto-remove -y \
-    build-essential \
+    build-essential && \
   apt-get clean && \
 
 # add local files
