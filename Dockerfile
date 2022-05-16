@@ -8,7 +8,7 @@ LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DA
 LABEL maintainer="aptalca"
 
 # environment settings
-ENV HOME="/config"
+ENV HOME="/home/ubuntu"
 
 RUN \
   echo "**** install runtime dependencies ****" && \
@@ -19,7 +19,7 @@ RUN \
     sudo && \
   apt-get install -y --no-install-recommends -- ssh && \
   mkdir -p -m0755 /run/sshd && \
-  mkdir -m700 ~/.ssh  
+  mkdir -m700 $HOME 
 
 # ports and volumes
 EXPOSE 22
