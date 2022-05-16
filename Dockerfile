@@ -15,7 +15,6 @@ RUN \
   apt-get update && \
   apt-get install -y \
     build-essential \
-    nodejs && \
   echo "**** install runtime dependencies ****" && \
   apt-get install -y \
     git \
@@ -28,7 +27,6 @@ RUN \
   echo "**** clean up ****" && \
   apt-get purge --auto-remove -y \
     build-essential \
-    nodejs && \
   apt-get clean && \
 
 # add local files
