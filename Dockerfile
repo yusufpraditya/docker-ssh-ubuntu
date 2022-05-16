@@ -19,7 +19,7 @@ RUN \
     sudo && \
   apt-get install -y --no-install-recommends -- ssh && \
   mkdir -p -m0755 /run/sshd && \
-  mkdir -m700 /home/ubuntu/.ssh
+  mkdir -p -m700 /home/ubuntu/.ssh
 
 # ports and volumes
 EXPOSE 22
